@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
   <meta charset="UTF-8">
@@ -34,7 +34,7 @@
       width: 100%;
       height: 300px;
       background: darkgrey;
-      
+
     }
   </style>
 </head>
@@ -47,10 +47,13 @@
 
     <div class="form">
       <fieldset>
-        <form action="user_create.php" method="POST" enctype="multipart/form-data">
+        <form action="user_create.php" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="size" value="1000000">
           <p>
             名前:<input type="text" name="name">
           </p>
+          <p class="error">ニックネームを入力してください</p>
+
           <p>
             e-mail:<input type="text" name="email">
           </p>
