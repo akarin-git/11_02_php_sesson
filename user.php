@@ -1,3 +1,10 @@
+<?php
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -36,6 +43,10 @@
       background: darkgrey;
 
     }
+
+    .error {
+      color: red;
+    }
   </style>
 </head>
 
@@ -51,21 +62,19 @@
           <input type="hidden" name="size" value="1000000">
           <p>
             名前:<input type="text" name="name">
-          </p>
-          <p class="error">ニックネームを入力してください</p>
-
-          <p>
+            </p>
+            <p>
             e-mail:<input type="text" name="email">
-          </p>
-          <p>
-            password:<input type="text" name="password">
-          </p>
-          <p>
-            アイコン画像:<input type="file" name="icon_image">
-          </p>
-          <p>
-            <input type="submit" value="登録">
-          </p>
+            </p>
+            <p>
+              password:<input type="text" name="password">
+            </p>
+            <p>
+              アイコン画像:<input type="file" name="icon_image">
+            </p>
+            <p>
+              <input type="submit" value="登録">
+            </p>
         </form>
         <div>
           <p><a href="login.php">ログイン</a></p>

@@ -5,6 +5,3 @@ include('functions.php');
 
 
 $pdo = connect_to_db();
-
-
-?>

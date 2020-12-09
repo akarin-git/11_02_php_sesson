@@ -9,8 +9,8 @@ include('functions.php');
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
-$icon = $_FILES['icon_image']['name']; 
-$target ="images/".basename($_FILES['icon_image']['name']);
+$icon = date('YmdHis').$_FILES['icon_image']['name']; 
+$target ="images/".basename($icon);
 $pdo = connect_to_db();
 
 
@@ -38,7 +38,7 @@ if($status == false) {
   echo json_encode(["error_msg" => "{$error[2]}"]);
   exit();
 } else {
-  header("Location:user.php");
+  header("Location:user_join.php");
   exit();
 }
 
