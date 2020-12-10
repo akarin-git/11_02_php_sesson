@@ -58,23 +58,23 @@
 
     <div class="form">
       <fieldset>
-        <form action="user_create.php" method="post" enctype="multipart/form-data">
+        <form action="user_join.php" method="post" enctype="multipart/form-data">
           <input type="hidden" name="size" value="1000000">
           <p>
-            名前:<input type="text" name="name">
-            </p>
-            <p>
-            e-mail:<input type="text" name="email">
-            </p>
-            <p>
-              password:<input type="text" name="password">
-            </p>
-            <p>
-              アイコン画像:<input type="file" name="icon_image">
-            </p>
-            <p>
-              <input type="submit" value="登録">
-            </p>
+            名前:<input type="text" name="name" required>
+          </p>
+          <p>
+            e-mail:<input type="text" name="email" required>
+          </p>
+          <p>
+            password:<input type="password" name="password" required>
+          </p>
+          <p>
+            アイコン画像:<input type="file" name="icon_image">
+          </p>
+          <p>
+            <input type="submit" value="登録">
+          </p>
         </form>
         <div>
           <p><a href="login.php">ログイン</a></p>

@@ -50,8 +50,8 @@
     <div class="user_form">
       <div class="user_icon">i</div>
       <div class="user_form_btn">
-        <a href="user_create.php"><button>新規登録</button></a>
-        <a href="user_login.php"><button>ログイン</button></a>
+        <a href="user.php"><button>新規登録</button></a>
+        <a href="login.php"><button>ログイン</button></a>
       </div>
     </div>
 </div>
