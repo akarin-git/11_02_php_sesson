@@ -1,5 +1,12 @@
+<?php
+
+
+?>
+
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
   <meta charset="UTF-8">
@@ -34,7 +41,11 @@
       width: 100%;
       height: 300px;
       background: darkgrey;
-      
+
+    }
+
+    .error {
+      color: red;
     }
   </style>
 </head>
@@ -47,15 +58,16 @@
 
     <div class="form">
       <fieldset>
-        <form action="user_create.php" method="POST" enctype="multipart/form-data">
+        <form action="user_join.php" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="size" value="1000000">
           <p>
-            名前:<input type="text" name="name">
+            名前:<input type="text" name="name" required>
           </p>
           <p>
-            e-mail:<input type="text" name="email">
+            e-mail:<input type="text" name="email" required>
           </p>
           <p>
-            password:<input type="text" name="password">
+            password:<input type="password" name="password" required>
           </p>
           <p>
             アイコン画像:<input type="file" name="icon_image">
