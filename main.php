@@ -23,7 +23,7 @@
     <div class="content_menu">
       <ul>
         <li>
-          <a href="">コンテンツ</a>
+          <a href="content.php">コンテンツ</a>
         </li>
         <li>
           <a href="">コンテンツ</a>
