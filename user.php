@@ -19,33 +19,24 @@
     }
 
     body {
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 16px;
+      background: rgb(54, 112, 199);
     }
 
-    .user_create {
-      width: 80%;
+    .user_form {
+      height: 300px;
+      width: 400px;
+      background: #fff;
       margin: 0 auto;
-      margin-top: 30px;
-
+      margin-top: 70px;
+      padding: 70px;
     }
 
-    .info {
-      width: 100%;
-      height: 300px;
-      background: darkcyan;
-
+    .user_form h1 {
+      margin: 0;
     }
 
-    .form {
-      width: 100%;
-      height: 300px;
-      background: darkgrey;
-
-    }
-
-    .error {
-      color: red;
+    .submit {
+      margin-top: 50px;
     }
   </style>
 </head>
@@ -53,34 +44,33 @@
 <body>
 
   <section class="user_create">
-    <div class="info">
-    </div>
+    <div class="user_form">
+      <div class="form">
 
-    <div class="form">
-      <fieldset>
         <form action="user_join.php" method="post" enctype="multipart/form-data">
           <input type="hidden" name="size" value="1000000">
-          <p>
-            名前:<input type="text" name="name" required>
-          </p>
-          <p>
-            e-mail:<input type="text" name="email" required>
-          </p>
-          <p>
-            password:<input type="password" name="password" required>
-          </p>
-          <p>
-            アイコン画像:<input type="file" name="icon_image">
-          </p>
-          <p>
-            <input type="submit" value="登録">
-          </p>
+          <p>name:</p>
+          <input type="text" name="name" required>
+
+          <p>e-mail:</p><input type="text" name="email" required>
+
+          <p>password:</p><input type="password" name="password" required>
+
+          <div class="submit">
+            <p>
+              <input type="submit" value="登録">
+            </p>
         </form>
         <div>
           <p><a href="login.php">ログイン</a></p>
+
         </div>
-      </fieldset>
+      </div>
+
     </div>
+    </div>
+
+
   </section>
 
 </body>

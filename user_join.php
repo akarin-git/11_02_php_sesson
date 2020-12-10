@@ -8,7 +8,7 @@ $_SESSION['join'] = $_POST;
 
 $name = $_SESSION['join']['name'];
 $email = $_SESSION['join']['email'];
-$password = $_SESSION['join']['password'];
+$password = sha1($_SESSION['join']['password']);
 
 $pdo = connect_to_db();
 $sql = 'INSERT INTO user(id, name,email,password,created_at) VALUES(NULL,:name,:email,:password,sysdate())';
