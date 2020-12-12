@@ -74,7 +74,10 @@ if ($status == false) {
           <div class="output_date">
             <span>
               <p><?php echo $record['created_at'] ?></p>
+              
               <a href="delete.php?id=<?php echo $record['id'] ?>">delete</a>
+              <a href="edit.php?id=<?php echo $record['id'] ?>">edit</a>
+
             </span>
           </div>
 
