@@ -24,7 +24,7 @@ $target = "images/" . basename($_FILES['image']['name']);
 
 $pdo = connect_to_db();
 
-$sql = 'INSERT INTO post_table(id,title,text,image,created_at) VALUES (NULL,:title,:text,:image,sysdate())';
+$sql = 'INSERT INTO post_table(id,title,text,image,created_at,update_at) VALUES (NULL,:title,:text,:image,sysdate()sysdate())';
 
 if(move_uploaded_file($_FILES['image']['tmp_name'],$target)){
   $msg = "Image uploaded successfully";

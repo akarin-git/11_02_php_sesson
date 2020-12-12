@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include('functions.php');
 
 $id = $_GET['id'];
@@ -18,39 +18,43 @@ if ($status == false) {
   exit();
 } else {
   $record = $stmt->fetch(PDO::FETCH_ASSOC);
-//   var_dump($record);
-//   exit();
+  // var_dump($record);
+  // exit();
 
 }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
-  
- <div class="input">
-        <ul>
 
-          <li>
-            title: <input type="text" name="title">
-          </li>
-          <li>
-            text: <textarea type="text" rows="5" cols="35" name="text" value="<?= $record["id"]?>"></textarea>
-          </li>
-          <li>
+  <div class="input">
+    <form action="update.php" method="post">
 
-            <input type="file" name="image">
-          </li>
-          <li>
-            <input type="submit" name="upload" value="送信">
-          </li>
-        </ul>
-      </div>
+      <ul>
+        <li>
+          title: <input type="text" name="title" value="<?= $record["title"] ?>">
+        </li>
+
+        <li>
+          text: <textarea type="text" rows="5" cols="35" name="text"><?= $record["text"] ?></textarea>
+        </li>
+
+        <li>
+          <input type="submit" name="upload" value="送信">
+          <input type="hidden" name="id" value="<?= $record["id"] ?>">
+        </li>
+      </ul>
+
+    </form>
+  </div>
 
 </body>
-</html>
 
+</html>
