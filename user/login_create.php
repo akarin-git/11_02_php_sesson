@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('functions.php');
+include('../functions.php');
 
 if (
   !isset($_POST['email']) || $_POST['email'] == '' ||
@@ -38,11 +38,11 @@ if (
   if($member){
     $_SESSION['id'] = $member['id'];
     $_SESSION['time'] = time();
-    header('location:main.php');
+    header('location:../main.php');
     exit();
   } else {
     echo('error');
-  header('location:login.php');
+  header('location:user/login.php');
   }
   
 ?>
