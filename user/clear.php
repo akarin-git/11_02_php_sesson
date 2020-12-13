@@ -25,7 +25,7 @@
 <body>
   <div class="thx_card">
     <h2>ご登録ありがとうございます。</h2>
-    <p><a href="user/login.php"><span>ログイン画面へ</span></a></p>
+    <p><a href="login.php"><span>ログイン画面へ</span></a></p>
   </div>
 </body>
 

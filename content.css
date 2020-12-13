@@ -26,26 +26,30 @@
   margin-top: 20px;
   width: 200px;
 }
+
 .output h1 {
-font-size: 18px;
-text-align: center;
+  font-size: 18px;
+  text-align: center;
 }
-.output_text{
+
+.output_text {
   width: 90%;
-  
+
   margin: 0 auto;
 }
-.output_text p{
+
+.output_text p {
   font-size: 12px;
   width: 90%;
 }
-.output p{
+
+.output p {
   font-size: 13px;
-  
-  
+
+
 }
 
-.output span{
+.output span {
   font-size: 12px;
 }
 
@@ -63,3 +67,4 @@ text-align: center;
 .input li {
   margin: 8px 0;
 }
+

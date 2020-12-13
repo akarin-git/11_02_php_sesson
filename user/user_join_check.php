@@ -3,7 +3,7 @@ session_start();
 include('../functions.php');
 
   if (!isset($_SESSION['join'])) {
-    header('location:use/user.php');
+    header('location:user.php');
    exit();
   }
 
@@ -16,12 +16,12 @@ include('../functions.php');
   $sql = 'INSERT INTO user(id, name,email,password,created_at) VALUES(NULL,:name,:email,:password,sysdate())';
 
   $stmt = $pdo->prepare($sql);
-
-  $stmt = $pdo->prepare($sql);
   $stmt->bindValue(':name', $name, PDO::PARAM_STR);
   $stmt->bindValue(':email', $email, PDO::PARAM_STR);
   $stmt->bindValue(':password', $password, PDO::PARAM_STR);
   $status = $stmt->execute();
+  // var_dump($status);
+  // exit();
 
 if ($status == false) {
   $error = $stmt->errorInfo();
@@ -54,7 +54,7 @@ if ($status == false) {
       <div>
         <p></p>
         <form action="" method="post">
-          <input type="text" name="action" value="submit">
+          <input type="hidden" name="action" value="submit">
 
           <dl>
             <dt>name</dt>
