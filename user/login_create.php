@@ -7,8 +7,7 @@ if (
   !isset($_POST['password']) || $_POST['password'] == '' 
   
   ) {
-    // 項目が入力されていない場合はここでエラーを出力し，以降の処理を中止する
-    echo json_encode(["error_msg" => "no input"]);
+    echo '<p>エラー </p>';
     exit();
   }
   
@@ -26,18 +25,19 @@ if (
   $status = $stmt->execute();
 
   
-  // var_dump($member);
-  // exit();
   $member = $stmt->fetch(PDO::FETCH_ASSOC);
-
-  if($member){
-    $_SESSION['id'] = session_id();
-    $_SESSION['time'] = time();
-    header('location:../main.php');
+  
+  if(!$member){
+    echo '<p>登録情報に偽りがあります </p>';
+    
     exit();
   } else {
-    echo('error');
-  header('location:user/login.php');
+    $_SESSION['id'] = $member['id'];
+    $_SESSION['time'] = time();
+    // var_dump($_SESSION['id']);
+    // exit();
+    header('location:../main.php');
+    exit();
   }
   
 ?>

@@ -4,6 +4,17 @@ session_start();
 include('functions.php');
 
 $pdo = connect_to_db();
+ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    $_SESSION['time'] = time();
+    $members = $pdo->prepare('SELECT * FROM user WHERE id=?');
+    $members->execute(array($_SESSION['id']));
+    $member = $members->fetch();
+  } else {
+    header('location:user/login.php');
+    exit();
+  }
+
+
 $sql = 'SELECT * FROM post_table ORDER BY id DESC LIMIT 3';
 
 $stmt = $pdo->prepare($sql);
@@ -17,10 +28,6 @@ if ($status == false) {
 } else {
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
-
-
-
 
 
 
@@ -45,19 +52,21 @@ if ($status == false) {
       <div class="header_content">
         <div class="header_title">
           <h1>PHP</h1>
+          <p>hello <?php echo (htmlspecialchars($member['name'])) ?></p>
         </div>
         <div class="content_menu">
           <ul>
             <li>
-              <a href="content.php">コンテンツ</a>
+              <a href="content.php">みんなのDIY</a>
             </li>
-            <li>
+            <!-- <li>
               <a href="">コンテンツ</a>
             </li>
             <li>
               <a href="">コンテンツ</a>
-            </li>
+            </li> -->
           </ul>
+
         </div>
       </div>
 
@@ -75,8 +84,9 @@ if ($status == false) {
 
         <div class="user_form">
           <div class="user_form_btn">
-            <a href="user.php"><button>新規登録</button></a>
-            <a href="login.php"><button>ログイン</button></a>
+            <a href="user/user.php"><button>新規登録</button></a>
+            <a href="user/login.php"><button>ログイン</button></a>
+            <a href="user/logout.php"><button>ログアウト</button></a>
           </div>
         </div>
       </div>
@@ -88,19 +98,28 @@ if ($status == false) {
 
     <section class="top_conteiner">
       <div class="main_top_title">
-        <h1>タイトル</h1>
+        <h1>LET TRY search</h1>
         <p>DIY project</p>
+        <div class="header_search">
+          <form action="search.php" method="post">
+            <input type="text" name="search">
+            
+            <input type="submit" value="送信">
+          </form>
+        </div>
       </div>
 
       <div class="top_images_box">
 
         <?php foreach ($result as $record) : ?>
-          <div class="top_image">
-            <img src="images/<?php echo "{$record['image']}"; ?>" alt="">
-            <h1><?php echo $record['title'] ?></h1>
-            <p><?php echo $record['text'] ?></p>
-          </div>
-          <?php endforeach; ?>
+          <a href="content.php">
+            <div class="top_image">
+              <img src="images/<?php echo "{$record['image']}"; ?>" alt="">
+              <h1><?php echo $record['title'] ?></h1>
+              <p><?php echo $record['text'] ?></p>
+            </div>
+          </a>
+        <?php endforeach; ?>
 
       </div>
     </section>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('functions.php');
-// var_dump($_SESSION['id']);
+// var_dump($_POST);
 // exit();
 $pdo = connect_to_db();
 
@@ -15,19 +15,40 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   exit();
 }
 
-$sql = 'SELECT * FROM post_table ORDER BY id DESC LIMIT 6';
+      $msg = "";
 
-$stmt = $pdo->prepare($sql);
-$status = $stmt->execute();
-// var_dump($status);
-// exit();
+      if (
+        !isset($_POST['name']) || $_POST['name'] == "" ||
+        !isset($_POST['text']) || $_POST['text'] == "" ||
+        !isset($_FILES['image']) || $_FILES['image'] == ""
 
-if ($status == false) {
-  $error = $stmt->errorInfo();
-  exit('sqlError:' . $error[2]);
-} else {
-  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+      ) {
+        // exit('入力してください   ');
+
+      }
+      if (isset($_POST['upload'])) {
+        $image = $_FILES['image']['name'];
+        $title = $_POST['title'];
+        $text = $_POST['text'];
+        
+
+        $target = "images/" . basename($_FILES['image']['name']);
+
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+          $msg = "Image uploaded successfully";
+        } else {
+          $msg = "There was a problem ";
+        }
+
+        $sql= 'INSERT INTO post_table(user_id,title ,text,image,created_at) VALUES(:user_id,:title,:text,:image,sysdate())';
+
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':user_id', $member['id'], PDO::PARAM_INT);
+  $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+  $stmt->bindValue(':text', $text, PDO::PARAM_STR);
+  $stmt->bindValue(':image', $image, PDO::PARAM_STR);
+  $status = $stmt->execute();
+      }
 
 
 ?>
@@ -45,33 +66,11 @@ if ($status == false) {
 
   <p><a href="main.php">戻る</a></p>
 
-  <?php echo $member['name'] ?>
-  <section class="container">
-    <div class="output_box">
-      <?php foreach ($result as $record) : ?>
-        <div class="output">
-          <p><?php echo $member['name'] ?></p>
-          <img src="images/<?php echo "{$record['image']}"; ?>" alt="">
-          <h1><?php echo $record['title'] ?></h1>
-          <div class="output_text">
-            <p><?php echo $record['text'] ?></p>
-          </div>
-          <div class="output_date">
-            <span>
-              <p><?php echo $record['created_at'] ?></p>
-
-              <a href="delete.php?id=<?php echo $record['id'] ?>">delete</a>
-              <a href="edit.php?id=<?php echo $record['id'] ?>">edit</a>
-
-            </span>
-          </div>
-        </div>
-      <?php endforeach; ?>
-    </div>
+  
 
 
     <div class="input_form">
-      <form action="content_create.php" method="post" enctype="multipart/form-data">
+      <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="size" value="1000000">
 
         <div class="input">
