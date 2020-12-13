@@ -43,6 +43,7 @@ if($status == false) {
   $error = $stmt->errorInfo();
   exit('sqlError:' . $error[2]);
 } else {
+  $_SESSION = $_POST;
   header('location:content.php');
 }
 exit();

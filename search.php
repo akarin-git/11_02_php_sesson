@@ -37,9 +37,7 @@ if ($status == false) {
 </head>
 
 <style>
-  body {
-    
-  }
+  
   .search_count {
     border: 1px solid rgb(149, 146, 146);
     width: 40%;

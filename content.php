@@ -1,9 +1,9 @@
 <?php
 session_start();
 include('functions.php');
-// var_dump($_SESSION['id']);
-// exit();
 $pdo = connect_to_db();
+
+
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   $_SESSION['time'] = time();
@@ -15,18 +15,19 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   exit();
 }
 
-$sql = 'SELECT * FROM post_table ORDER BY id DESC LIMIT 6';
+$sql = 'SELECT * FROM post_table ORDER BY created_at DESC LIMIT 6';
+
 
 $stmt = $pdo->prepare($sql);
 $status = $stmt->execute();
-// var_dump($status);
-// exit();
 
 if ($status == false) {
   $error = $stmt->errorInfo();
   exit('sqlError:' . $error[2]);
 } else {
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//   var_dump($result);
+//   exit();
 }
 
 
@@ -50,7 +51,7 @@ if ($status == false) {
     <div class="output_box">
       <?php foreach ($result as $record) : ?>
         <div class="output">
-          <p><?php echo $member['name'] ?></p>
+          <p><?php echo $record['name'] ?></p>
           <img src="images/<?php echo "{$record['image']}"; ?>" alt="">
           <h1><?php echo $record['title'] ?></h1>
           <div class="output_text">
