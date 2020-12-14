@@ -23,7 +23,7 @@ header {
 }
 
 main {
-  height: 100%;
+  height: auto;
   width: 80%;
   background: darkcyan;
   margin: 0 auto;
@@ -129,12 +129,14 @@ footer {
   margin: 10px;
 }
 
-
+.top_image img{
+  width: 250px;
+}
 
 .main_conteiner {
   border: 1px solid rgb(168, 165, 165);
   width: 100%;
-  height: 500px;
+  height: 300px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -146,28 +148,16 @@ footer {
   width: 25%;
 }
 
-.search_box {
-  width: 100%;
-  background: cornflowerblue;
-}
-
-.search_input {
-  width: 100%;
-  height: 200px;
-  border: 1px solid rgb(168, 165, 165);
-}
-
 .search_category {
   width: 100%;
   height: 100%;
   border: 1px solid rgb(168, 165, 165);
-  /* background: chartreuse; */
-
 }
 
 .search_category ul {
   list-style: none;
 }
+
 
 .content_post {
   border: 1px solid rgb(168, 165, 165);

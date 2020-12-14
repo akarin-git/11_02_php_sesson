@@ -1,6 +1,7 @@
 <?php
 session_start();
 error_reporting(E_ALL & ~E_NOTICE);
+include('../functions.php');
 
 if(!empty($_POST)){
   if ($_POST['name'] === '') {
@@ -15,7 +16,23 @@ if(!empty($_POST)){
   if ($_POST['password'] === '') {
     $error['password'] = 'blank';
   }
-  
+
+  // 登録済みか確認
+  if(empty($error)){
+    $email = $_POST['email'];
+    $pdo = connect_to_db();
+    $sql = 'SELECT COUNT(*) AS cnt FROM user WHERE email=:email';
+    $member = $pdo->prepare($sql);
+    $member->bindValue(':email', $email, PDO::PARAM_INT);
+    $status = $member->execute();
+    // var_dump($status);
+    // exit();
+    $result = $member->fetch();
+    if (!$result){
+      $error['email'] = 'duplicate';
+    }
+  }
+
   if(empty($error)){
     $_SESSION['join'] = $_POST;
     header('location:user_join_check.php');
@@ -25,8 +42,8 @@ if(!empty($_POST)){
   if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
     $_POST = $_SESSION['join'];
   }
-
 }
+
 
 ?>
 
@@ -87,6 +104,9 @@ if(!empty($_POST)){
           <p>e-mail:</p><input type="text" name="email" value="<?php echo (htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>">
           <?php if ($error['email'] === 'blank') : ?>
             <p class="error">* メールアドレスを入力してください</p>
+          <?php endif; ?>
+          <?php if ($error['email'] === 'duplicate') : ?>
+            <p class="error">* 登録済みです</p>
           <?php endif; ?>
 
           <p>password:</p><input type="password" name="password" value="<?php echo (htmlspecialchars($_POST['password'], ENT_QUOTES)); ?>">
