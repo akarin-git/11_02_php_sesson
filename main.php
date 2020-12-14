@@ -4,15 +4,15 @@ session_start();
 include('functions.php');
 
 $pdo = connect_to_db();
- if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
-    $_SESSION['time'] = time();
-    $members = $pdo->prepare('SELECT * FROM user WHERE id=?');
-    $members->execute(array($_SESSION['id']));
-    $member = $members->fetch();
-  } else {
-    header('location:user/login.php');
-    exit();
-  }
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+  $_SESSION['time'] = time();
+  $members = $pdo->prepare('SELECT * FROM user WHERE id=?');
+  $members->execute(array($_SESSION['id']));
+  $member = $members->fetch();
+} else {
+  header('location:user/login.php');
+  exit();
+}
 
 
 $sql = 'SELECT * FROM post_table ORDER BY id DESC LIMIT 3';
@@ -101,9 +101,9 @@ if ($status == false) {
         <h1>LET TRY search</h1>
         <p>DIY project</p>
         <div class="header_search">
-          <form action="search.php" method="post">
+          <form action="search/search.php" method="post">
             <input type="text" name="search">
-            
+
             <input type="submit" value="送信">
           </form>
         </div>
@@ -127,28 +127,19 @@ if ($status == false) {
     <section class="main_conteiner">
 
       <div class="content_search">
-
-        <div class="search_box">
-          <div class="search_input">
-            <h1 class="search_title">search</h1>
-            <!-- search.php -->
-            <form action="search.php" method="post">
-              <input type="text" name="items">
-              <input type="submit" value="送信">
-            </form>
-            <!-- ここまで -->
-          </div>
-
-          <div class="search_category">
-            <h1 class="category_title">category</h1>
-            <ul>
-              <li><a href="">木材</a></li>
-              <li><a href="">プラスチック</a></li>
-              <li><a href="">紙</a></li>
-              <li><a href="">デジタル×ものづくり</a></li>
-            </ul>
-          </div>
+        <div class="search_category">
+          <h1 class="search_title">search</h1>
+          <ul>
+            <li><a href="search/search_easy.php">すぐ作れる</a></li>
+            <li><a href="search/search_digital.php">デジタル</a></li>
+            <li><a href="search/search_living.php">家具</a></li>
+            <li><a href="search/search_craft.php">クラフト</a></li>
+            <li><a href="search/search_lifeline.php">日用品</a></li>
+            <li><a href="search/search_outdoor.php">アウトドア</a></li>
+          </ul>
         </div>
+
+
       </div>
 
       <!-- php 記事埋め込み -->

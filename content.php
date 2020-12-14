@@ -47,7 +47,7 @@ if ($status == false) {
 
   <p><a href="main.php">戻る</a></p>
 
-  <?php echo $member['name'] ?>
+  <p><?php echo $member['name'] ?>さん、こんにちは</p>
   <section class="container">
     <div class="output_box">
       <?php foreach ($result as $record) : ?>
@@ -94,6 +94,8 @@ if ($status == false) {
               <option value="電子工作">電子工作</option>
               <option value="リビング">リビング</option>
               <option value="おもちゃ">おもちゃ</option>
+              <option value="おもちゃ">すぐ作れる</option>
+
             </select>
             <li>
               <input type="submit" name="upload" value="送信">
