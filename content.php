@@ -3,7 +3,8 @@ session_start();
 include('functions.php');
 $pdo = connect_to_db();
 
-
+// var_dump($_SESSION['id']);
+// exit();
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   $_SESSION['time'] = time();
@@ -15,7 +16,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   exit();
 }
 
-$sql = 'SELECT * FROM post_table ORDER BY created_at DESC LIMIT 6';
+$sql = 'SELECT * FROM post_table ORDER BY id DESC LIMIT 6';
 
 
 $stmt = $pdo->prepare($sql);
@@ -26,8 +27,8 @@ if ($status == false) {
   exit('sqlError:' . $error[2]);
 } else {
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//   var_dump($result);
-//   exit();
+  //   var_dump($result);
+  //   exit();
 }
 
 
@@ -51,11 +52,12 @@ if ($status == false) {
     <div class="output_box">
       <?php foreach ($result as $record) : ?>
         <div class="output">
-          <p><?php echo $record['name'] ?></p>
+
           <img src="images/<?php echo "{$record['image']}"; ?>" alt="">
           <h1><?php echo $record['title'] ?></h1>
           <div class="output_text">
             <p><?php echo $record['text'] ?></p>
+            <p>#<?php echo $record['category'] ?></p>
           </div>
           <div class="output_date">
             <span>
@@ -86,6 +88,13 @@ if ($status == false) {
             <li>
               <input type="file" name="image">
             </li>
+            <select name="category">
+              <option value="">選択してください</option>
+              <option value="クラフト">クラフト</option>
+              <option value="電子工作">電子工作</option>
+              <option value="リビング">リビング</option>
+              <option value="おもちゃ">おもちゃ</option>
+            </select>
             <li>
               <input type="submit" name="upload" value="送信">
             </li>

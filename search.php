@@ -6,7 +6,7 @@ $search_item = "%" . $search . "%";
 // exit();
 
 $pdo = connect_to_db();
-$sql = 'SELECT * FROM post_table WHERE title LIKE (:title)';
+$sql = 'SELECT * FROM post_table WHERE title LIKE :title';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':title', $search_item, PDO::PARAM_STR);
@@ -67,6 +67,7 @@ if ($status == false) {
           <h1><?php echo $row['title'] ?></h1>
           <div class="output_text">
             <p><?php echo $row['text'] ?></p>
+            <p><?php echo $row['category'] ?></p>
           </div>
           <div class="output_date">
             <span>

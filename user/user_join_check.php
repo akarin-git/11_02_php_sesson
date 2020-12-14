@@ -13,9 +13,10 @@ include('../functions.php');
   $password = sha1($_SESSION['join']['password']);
 
   $pdo = connect_to_db();
-  $sql = 'INSERT INTO user(id, name,email,password,created_at) VALUES(NULL,:name,:email,:password,sysdate())';
+  $sql = 'INSERT INTO user(id,name,email,password,created_at) VALUES(NULL,:name,:email,:password,sysdate())';
 
   $stmt = $pdo->prepare($sql);
+  
   $stmt->bindValue(':name', $name, PDO::PARAM_STR);
   $stmt->bindValue(':email', $email, PDO::PARAM_STR);
   $stmt->bindValue(':password', $password, PDO::PARAM_STR);
