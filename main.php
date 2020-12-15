@@ -56,9 +56,9 @@ if ($status == false) {
         </div>
         <div class="content_menu">
           <ul>
-            <li>
+            <!-- <li>
               <a href="content.php">みんなのDIY</a>
-            </li>
+            </li> -->
             <!-- <li>
               <a href="">コンテンツ</a>
             </li>
@@ -131,7 +131,7 @@ if ($status == false) {
           <h1 class="search_title">search</h1>
           <ul>
             <li><a href="search/search_easy.php">すぐ作れる</a></li>
-            <li><a href="search/search_digital.php">デジタル</a></li>
+            <li><a href="search/search_digital.php">電子工作</a></li>
             <li><a href="search/search_living.php">家具</a></li>
             <li><a href="search/search_craft.php">クラフト</a></li>
             <li><a href="search/search_lifeline.php">日用品</a></li>

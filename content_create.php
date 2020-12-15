@@ -18,19 +18,26 @@ if (
   // exit('入力してください   ');
 
 }
+
+
+$pdo = connect_to_db();
 if(isset($_POST['upload'])){
   $image = $_FILES['image']['name'];
   $title = $_POST['title'];
   $text = $_POST['text'];
   $category = $_POST['category'];
-
-  // var_dump($category);
+  
+  $members = $pdo->prepare('SELECT * FROM user WHERE id=?');
+  $members->execute(array($_SESSION['id']));
+  $member = $members->fetch();
+  $member_id = $member['id'];
+  $member_name = $member['name'];
+  // var_dump($member_id);
   // exit();
 $target = "images/" . basename($_FILES['image']['name']);
 
-$pdo = connect_to_db();
 
-$sql = 'INSERT INTO post_table(id,title,text,image,category,created_at,updated_at) VALUES (NULL,:title,:text,:image,:category,sysdate(),sysdate())';
+$sql = 'INSERT INTO post_table(id,user_id,user_name,title,text,image,category,created_at,updated_at) VALUES (NULL,:user_id,:user_name,:title,:text,:image,:category,sysdate(),sysdate())';
 
 if(move_uploaded_file($_FILES['image']['tmp_name'],$target)){
   $msg = "Image uploaded successfully";
@@ -40,6 +47,8 @@ if(move_uploaded_file($_FILES['image']['tmp_name'],$target)){
 
 $stmt = $pdo->prepare($sql);
 
+$stmt->bindValue(':user_id', $member_id, PDO::PARAM_INT);
+$stmt->bindValue(':user_name', $member_name, PDO::PARAM_STR);
 $stmt->bindValue(':title', $title, PDO::PARAM_STR);
 $stmt->bindValue(':text', $text, PDO::PARAM_STR);
 $stmt->bindValue(':image', $image, PDO::PARAM_STR);

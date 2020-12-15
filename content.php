@@ -19,6 +19,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 $sql = 'SELECT * FROM post_table ORDER BY id DESC LIMIT 6';
 
 
+
 $stmt = $pdo->prepare($sql);
 $status = $stmt->execute();
 
@@ -52,7 +53,7 @@ if ($status == false) {
     <div class="output_box">
       <?php foreach ($result as $record) : ?>
         <div class="output">
-
+        <p><?php echo "{$record['user_name']}"?></p>
           <img src="images/<?php echo "{$record['image']}"; ?>" alt="">
           <h1><?php echo $record['title'] ?></h1>
           <div class="output_text">
@@ -62,10 +63,10 @@ if ($status == false) {
           <div class="output_date">
             <span>
               <p><?php echo $record['created_at'] ?></p>
-
+              <?php if($_SESSION['id'] == $record['user_id']):?>
               <a href="delete.php?id=<?php echo $record['id'] ?>">delete</a>
               <a href="edit.php?id=<?php echo $record['id'] ?>">edit</a>
-
+              <?php endif;?>
             </span>
           </div>
         </div>
@@ -94,7 +95,7 @@ if ($status == false) {
               <option value="電子工作">電子工作</option>
               <option value="リビング">リビング</option>
               <option value="おもちゃ">おもちゃ</option>
-              <option value="おもちゃ">すぐ作れる</option>
+              <option value="すぐ作れる">すぐ作れる</option>
 
             </select>
             <li>
