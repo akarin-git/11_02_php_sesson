@@ -3,6 +3,8 @@ session_start();
 include('functions.php');
 
 $id = $_GET['id'];
+// var_dump($_GET);
+// exit();
 
 $pdo = connect_to_db();
 

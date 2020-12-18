@@ -19,20 +19,17 @@ $sql = 'SELECT * FROM post_table ORDER BY id DESC LIMIT 3';
 
 $stmt = $pdo->prepare($sql);
 $status = $stmt->execute();
-// var_dump($status);
-// exit();
 
 if ($status == false) {
   $error = $stmt->errorInfo();
   exit('sqlError:' . $error[2]);
 } else {
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  // var_dump($result[0]);
+  // exit();
 }
 
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -55,30 +52,9 @@ if ($status == false) {
           <p>hello <?php echo (htmlspecialchars($member['name'])) ?></p>
         </div>
         <div class="content_menu">
-          <ul>
-            <!-- <li>
-              <a href="content.php">みんなのDIY</a>
-            </li> -->
-            <!-- <li>
-              <a href="">コンテンツ</a>
-            </li>
-            <li>
-              <a href="">コンテンツ</a>
-            </li> -->
-          </ul>
 
         </div>
       </div>
-
-      <!-- <div class="header_search">
-      <form action="search.php" method="post">
-        <input type="text" name="items">
-    
-        <input type="submit" value="送信">
-      </form>
-    </div> -->
-
-
 
       <div class="user_content">
 
@@ -98,7 +74,7 @@ if ($status == false) {
 
     <section class="top_conteiner">
       <div class="main_top_title">
-        <h1>LET TRY search</h1>
+        <h1><a href="content.php"> LET TRY search</a></h1>
         <p>DIY project</p>
         <div class="header_search">
           <form action="search/search.php" method="post">
@@ -112,13 +88,15 @@ if ($status == false) {
       <div class="top_images_box">
 
         <?php foreach ($result as $record) : ?>
-          <a href="content.php">
+
+          <a href="view.php?id=<?php echo $record['id'] ?>">
             <div class="top_image">
               <img src="images/<?php echo "{$record['image']}"; ?>" alt="">
+            </a>
               <h1><?php echo $record['title'] ?></h1>
               <p><?php echo $record['text'] ?></p>
+              <p><?php echo $record['created_at'] ?></p>
             </div>
-          </a>
         <?php endforeach; ?>
 
       </div>
