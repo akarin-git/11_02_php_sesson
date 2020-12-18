@@ -22,19 +22,36 @@
   position: relative;
 }
 
+.output_header {
+  display: block;
+
+}
+
+.output_name {
+  margin-left: 15px;
+  text-align: left;
+}
+
+.likes_box {
+  text-align: right;
+}
+
 .output img {
-  margin-top: 20px;
   width: 200px;
+  height: 150px;
+  margin: 0 auto;
 }
 
 .output h1 {
   font-size: 18px;
   text-align: center;
+
 }
 
 .output_text {
   width: 90%;
-
+  height: 20%;
+  background: rgb(235, 233, 233);
   margin: 0 auto;
 }
 
@@ -45,12 +62,24 @@
 
 .output p {
   font-size: 13px;
-
+  margin: 0;
 
 }
 
-.output span {
+
+.output_date {
+  text-align: right;
+  margin-top: 5px;
   font-size: 12px;
+}
+
+.output_date p {
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.ect_box {
+  font-size: 8px;
 }
 
 .input_form {
@@ -58,7 +87,6 @@
   background: rgb(241, 241, 144);
   padding: 5px;
 }
-
 
 .input ul {
   list-style: none;
@@ -77,4 +105,24 @@
 
 .search_count h1 {
   font-size: 18px;
+}
+
+.material-icons {
+  color: red;
+}
+
+.paging {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.paging ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paging li{
+  width: 100px;
 }

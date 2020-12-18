@@ -11,14 +11,15 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
   $members = $pdo->prepare('SELECT * FROM user WHERE id=?');
   $members->execute(array($_SESSION['id']));
   $member = $members->fetch();
+  // var_dump($member);
+  // exit();
 } else {
   header('location:user/login.php');
   exit();
 }
 
-$sql = 'SELECT * FROM post_table ORDER BY id DESC LIMIT 6';
-
-
+$sql = 'SELECT * FROM post_table LEFT OUTER JOIN (SELECT post_id,COUNT(id) AS cnt FROM likes_table GROUP BY post_id) AS likes ON post_table.id = likes.post_id ORDER BY id DESC LIMIT 9';
+// $sql = 'SELECT * FROM post_table ORDER BY id DESC LIMIT 12';
 
 $stmt = $pdo->prepare($sql);
 $status = $stmt->execute();
@@ -28,8 +29,8 @@ if ($status == false) {
   exit('sqlError:' . $error[2]);
 } else {
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  //   var_dump($result);
-  //   exit();
+  // var_dump($result);
+  // exit();
 }
 
 
@@ -42,6 +43,7 @@ if ($status == false) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="content.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -50,23 +52,40 @@ if ($status == false) {
 
   <p><?php echo $member['name'] ?>さん、こんにちは</p>
   <section class="container">
+
     <div class="output_box">
       <?php foreach ($result as $record) : ?>
+
         <div class="output">
-        <p><?php echo "{$record['user_name']}"?></p>
-          <img src="images/<?php echo "{$record['image']}"; ?>" alt="">
+          <div class="output_header">
+            <div class="output_name">
+              <p><?php echo "{$record['user_name']}" ?></p>
+            </div>
+            <div class="likes_box">
+              <p><?php echo $record['cnt'] ?>
+                <a href="likes.create.php?post_id=<?php echo $record['id'] ?>&user_id=<?php echo $member['id'] ?>"><span class="material-icons">
+                    favorite
+                  </span></a></p>
+            </div>
+          </div>
+          <a href="view.php?id=<?php echo $record['id'] ?>">
+            <img src="images/<?php echo "{$record['image']}"; ?>" alt="">
+          </a>
           <h1><?php echo $record['title'] ?></h1>
           <div class="output_text">
             <p><?php echo $record['text'] ?></p>
-            <p>#<?php echo $record['category'] ?></p>
           </div>
           <div class="output_date">
-            <span>
+            <p>#<?php echo $record['category'] ?></p>
+            <div class="ect_box">
               <p><?php echo $record['created_at'] ?></p>
-              <?php if($_SESSION['id'] == $record['user_id']):?>
+
+            </div>
+
+            <?php if ($_SESSION['id'] == $record['user_id']) : ?>
               <a href="delete.php?id=<?php echo $record['id'] ?>">delete</a>
               <a href="edit.php?id=<?php echo $record['id'] ?>">edit</a>
-              <?php endif;?>
+            <?php endif; ?>
             </span>
           </div>
         </div>
@@ -107,6 +126,15 @@ if ($status == false) {
     </div>
 
   </section>
+
+  <div class="paging">
+    <ul>
+      <li><a href="content.php?page=">前のページ</a></li>
+      <li>前のページ</li>
+      <li><a href="content.php?page=">次のページ</a></li>
+      <li>次のページ</li>
+    </ul>
+  </div>
 
 </body>
 
